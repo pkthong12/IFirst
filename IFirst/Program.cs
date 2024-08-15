@@ -25,10 +25,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-RuntimeConfiguration.AddConnectionString("ConnectionString.SQL Server (SqlClient)", "data source=124.158.6.137,1434;initial catalog=icorp2024;User ID=sa;Password=Icorp@2024;persist security info=False;TrustServerCertificate=True");
+RuntimeConfiguration.AddConnectionString("ConnectionString.SQL Server (SqlClient)", "data source=124.158.6.137,1434;initial catalog=icorp2024;User ID=sa;Password=Icorp@2024;TrustServerCertificate=True");
 RuntimeConfiguration.ConfigureDQE<SQLServerDQEConfiguration>(
-            c => c.AddDbProviderFactory(typeof(SqlClientFactory))
-                  .SetDefaultCompatibilityLevel(SqlServerCompatibilityLevel.SqlServer2012));
+    c => c.SetDefaultCompatibilityLevel(SqlServerCompatibilityLevel.SqlServer2012)
+          .AddDbProviderFactory(typeof(SqlClientFactory))
+          .SetTraceLevel(System.Diagnostics.TraceLevel.Verbose));
 
 var app = builder.Build();
 

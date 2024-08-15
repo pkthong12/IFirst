@@ -18,13 +18,13 @@ using Microsoft.IdentityModel.Tokens;
 using Aspose.Cells;
 using System.ComponentModel.Design;
 using Microsoft.AspNetCore.Routing.Template;
+using IFirst.Const;
 namespace IFirst.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
     public class IFirstCrudController : ControllerBase
     {
-        private readonly string CONNECTION = @"data source=124.158.6.137,1434;initial catalog=icorp2024;User ID=sa;Password=Icorp@2024;persist security info=False;TrustServerCertificate=True";
         private readonly DataAccessAdapter _DataAccessAdapter;
 
         private readonly ILogger<IFirstCrudController> _logger;
@@ -32,7 +32,7 @@ namespace IFirst.Controllers
         public IFirstCrudController(ILogger<IFirstCrudController> logger)
         {
             _logger = logger;
-            _DataAccessAdapter = new DataAccessAdapter(CONNECTION);
+            _DataAccessAdapter = new DataAccessAdapter(ConstDTO.CONNECTION);
         }
 
 
