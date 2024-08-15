@@ -12,12 +12,14 @@ namespace IFirst.Controllers.QLVB
             IWebHostEnvironment env)
         {
             _env = env;
+            _qlvbRepository = new QlvbRepository();
         }
         [HttpPost]
-        public async Task<IActionResult> Sync()
+        public async Task<IActionResult> Save(DateTime dateModify)
         {
-            var x  = await _qlvbRepository.Sync();
-            return Ok();
+            string location = Path.Combine(_env.ContentRootPath,"Static","FileTemplate");
+            var file = await _qlvbRepository.Save(location,dateModify);
+            return File(file, "application/octet-stream", "2C_TCTW_98.doc");
         }
     }
 }
