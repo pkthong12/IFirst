@@ -1,9 +1,13 @@
 using SD.LLBLGen.Pro.DQE.SqlServer;
 using SD.LLBLGen.Pro.ORMSupportClasses;
 using Microsoft.Data.SqlClient;
+using Hangfire;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+var services = builder.Services;
+services.AddHangfire(x => x.UseSqlServerStorage("data source=124.158.6.137,1434;initial catalog=icorp2024;User ID=sa;Password=Icorp@2024;TrustServerCertificate=True"));
 
 builder.Services.AddCors(options =>
 {
@@ -17,7 +21,6 @@ builder.Services.AddCors(options =>
                 .SetIsOriginAllowed(_ => true)
           );
 });
-
 
 
 builder.Services.AddControllers();
